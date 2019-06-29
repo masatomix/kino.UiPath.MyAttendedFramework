@@ -14,6 +14,7 @@
     <x:Property Name="Config" Type="InOutArgument(scg:Dictionary(x:String, ui:GenericValue))" />
     <x:Property Name="TransactionID" Type="InOutArgument(x:String)" />
     <x:Property Name="ProcessException" Type="InOutArgument(s:Exception)" />
+    <x:Property Name="baseDir" Type="InArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
@@ -68,6 +69,8 @@
       <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="Finally" sap2010:WorkflowViewState.IdRef="Sequence_5">
@@ -105,7 +108,7 @@
                       <TryCatch.Try>
                         <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke TakeScreenshot workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Framework\TakeScreenshot.xaml">
                           <ui:InvokeWorkflowFile.Arguments>
-                            <InArgument x:TypeArguments="x:String" x:Key="in_Folder">[Config("ExScreenshotsFolderPath")]</InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_Folder">[System.IO.Path.Combine(baseDir,Config("ExScreenshotsFolderPath"))]</InArgument>
                             <InArgument x:TypeArguments="x:String" x:Key="io_FilePath" />
                           </ui:InvokeWorkflowFile.Arguments>
                         </ui:InvokeWorkflowFile>
@@ -136,7 +139,7 @@
         </If.Else>
       </If>
     </Sequence>
-    <sads:DebugSymbol.Symbol>d1dDOlxVc2Vyc1xtLWtpbm9cRG9jdW1lbnRzXFVpUGF0aFxraW5vLlVpUGF0aC5NeUF0dGVuZGVkRnJhbWV3b3JrXEZyYW1ld29ya1xGaW5hbGx5LnhhbWwgSQOMAQ4CAQFKBYoBEAIBAksHiQEMAgEDSxVLNAIBBE0LVRYCASFYC4cBEAIBBk4NUx8CASRUDVSSAQIBIlgZWGQCAQdaD2IaAgEaZQ+FARoCAQlRU1FiAgEmUFdQXgIBJVR6VI8BAgEjWxFgIwIBHWERYdsCAgEbZhF9FgIBEH4RgwEjAgEMhAERhAHJAgIBCl5XXmYCAR9dW11sAgEeYUlhrgICARxmH2ZIAgERaBV7IAIBEoEBV4EBZgIBDoABW4ABbwIBDYQBTIQBnAICAQtqGW8xAgEXdx13/AECARNsVmx5AgEZas8Bau4BAgEYd4oBd/kBAgEU</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dz1WOlxnaXRca2luby5VaVBhdGguTXlBdHRlbmRlZEZyYW1ld29ya1xGcmFtZXdvcmtcRmluYWxseS54YW1sIEwDjwEOAgEBTQWNARACAQJOB4wBDAIBA04VTjQCAQRQC1gWAgEhWwuKARACAQZRDVYfAgEkVw1XkgECASJbGVtkAgEHXQ9lGgIBGmgPiAEaAgEJVFNUYgIBJlNXU14CASVXelePAQIBI14RYyMCAR1kEWTbAgIBG2kRgAEWAgEQgQERhgEjAgEMhwERhwHJAgIBCmFXYWYCAR9gW2BsAgEeZElkrgICARxpH2lIAgERaxV+IAIBEoQBV4QBZgIBDoMBW4MBbwIBDYcBTIcBnAICAQttGXIxAgEXeh16/AECARNvVm+ZAQIBGW3PAW3uAQIBGHqKAXr5AQIBFA==</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
